@@ -18,11 +18,6 @@ class CurrentPathError(Exception):
     """An exception raised from the current_path module."""
 
 
-if not hasattr(sys, "_getframe") or inspect.currentframe() is None:
-    raise CurrentPathError("This module relies on sys._getframe, which is not available for"
-                           "the Python implementation in use.")
-
-
 def _calling_module_current_file(depth: int = 2) -> Path:
     """A callable to get the current file path for the calling script, which is
     intended to be called in this module.
@@ -78,12 +73,16 @@ def current_dir_as_cwd(*path_segments: PathType):
         os.chdir(old_dir)
 
 
-def _main():
+def _init():
     """
-    Running main code block in function for ease of testing.
+    Running init code block in function for ease of testing.
     """
-    raise CurrentPathError("current_path is only intended to be imported.")
+    if __name__ == "__main__":
+        raise CurrentPathError("current_path is only intended to be imported.")
+
+    if not hasattr(sys, "_getframe") or inspect.currentframe() is None:
+        raise CurrentPathError("This module relies on sys._getframe, which is not available for"
+                               "the Python implementation in use.")
 
 
-if __name__ == "__main__":
-    _main()
+_init()

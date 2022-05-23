@@ -5,7 +5,8 @@ Tests for current_path.
 import os
 from pathlib import Path
 from unittest import TestCase
-from current_path import current_file, current_dir, current_dir_as_cwd
+from unittest.mock import patch
+from current_path import current_file, current_dir, current_dir_as_cwd, CurrentPathError
 
 
 CURRENT_PATH_TRUTH = Path(__file__).absolute()
@@ -59,3 +60,23 @@ class TestCurrentPath(TestCase):
                                                                  "context manager should reset "
                                                                  "the cwd after code block under "
                                                                  "CM has been exited")
+
+    def test_main_raises_exception(self):
+        """
+        Test running current_path as a script - should raise a CurrentPathError.
+        """
+
+        import current_path
+
+        with patch.object(current_path, "__name__", "__main__"):
+            self.assertRaises(CurrentPathError, current_path._init)
+
+    def test_getframe_undefined_raises_exception(self):
+        """
+        Test sys._getframe being undefined raising error.
+        """
+
+        import current_path
+
+        with patch.object(current_path, "sys", object()):
+            self.assertRaises(CurrentPathError, current_path._init)
