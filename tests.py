@@ -6,7 +6,9 @@ import os
 from pathlib import Path
 from unittest import TestCase
 from unittest.mock import patch
+
 from current_path import current_file, current_dir, current_dir_as_cwd, CurrentPathError
+import current_path
 
 
 CURRENT_PATH_TRUTH = Path(__file__).absolute()
@@ -66,8 +68,6 @@ class TestCurrentPath(TestCase):
         Test running current_path as a script - should raise a CurrentPathError.
         """
 
-        import current_path
-
         with patch.object(current_path, "__name__", "__main__"):
             self.assertRaises(CurrentPathError, current_path._init)
 
@@ -75,8 +75,6 @@ class TestCurrentPath(TestCase):
         """
         Test sys._getframe being undefined raising error.
         """
-
-        import current_path
 
         with patch.object(current_path, "sys", object()):
             self.assertRaises(CurrentPathError, current_path._init)
