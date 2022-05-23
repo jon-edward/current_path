@@ -35,18 +35,13 @@ def _calling_module_current_file(depth: int = 2) -> Path:
 
     index: int = 0
 
-    try:
-        inspecting_frame = inspect.currentframe()
-        while index < depth:
-            assert inspecting_frame, "Previous stack frame not found."
-            inspecting_frame = inspecting_frame.f_back
-            index += 1
+    inspecting_frame = inspect.currentframe()
+    while index < depth:
         assert inspecting_frame, "Previous stack frame not found."
-        return Path(inspecting_frame.f_code.co_filename).absolute()
-    except Exception as exception:
-        raise CurrentPathError(
-            "Cannot find path for the script current_path was imported into."
-        ) from exception
+        inspecting_frame = inspecting_frame.f_back
+        index += 1
+    assert inspecting_frame, "Previous stack frame not found."
+    return Path(inspecting_frame.f_code.co_filename).absolute()
 
 
 def current_file() -> Path:
