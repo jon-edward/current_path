@@ -78,5 +78,12 @@ def current_dir_as_cwd(*path_segments: PathType):
         os.chdir(old_dir)
 
 
-if __name__ == "__main__":
+def _main():
+    """
+    Running main code block in function for ease of testing.
+    """
     raise CurrentPathError("current_path is only intended to be imported.")
+
+
+if __name__ == "__main__":
+    _main()
