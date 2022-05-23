@@ -68,13 +68,17 @@ class TestCurrentPath(TestCase):
         Test running current_path as a script - should raise a CurrentPathError.
         """
 
+        #  pylint: disable=protected-access
         with patch.object(current_path, "__name__", "__main__"):
             self.assertRaises(CurrentPathError, current_path._init)
+        #  pylint: enable=protected-access
 
     def test_getframe_undefined_raises_exception(self):
         """
         Test sys._getframe being undefined raising error.
         """
 
+        #  pylint: disable=protected-access
         with patch.object(current_path, "sys", object()):
             self.assertRaises(CurrentPathError, current_path._init)
+        #  pylint: enable=protected-access
