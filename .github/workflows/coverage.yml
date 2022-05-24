@@ -52,10 +52,6 @@ jobs:
         run: |
           export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
           echo "total=$TOTAL" >> $GITHUB_ENV
-  publish:
-    needs: combine
-    runs-on: ubuntu-latest
-    steps:
       - name: Generate badge
         uses: schneegans/dynamic-badges-action@v1.4.0
         with:
