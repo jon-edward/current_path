@@ -28,3 +28,39 @@ jobs:
       with:
         name: coverage-json
         path: coverage.json
+  combine:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install coverage
+          pip install pytest
+      - name: Analyze testing coverage
+        run: |
+          coverage run -m pytest ./tests.py
+          coverage json
+      - name: Archive coverage artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-json
+          path: coverage.json
+      - name: Calculate coverage info
+        id: info
+        run: |
+          export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
+          echo "total=$TOTAL" >> $GITHUB_ENV
+  publish:
+    needs: combine
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate badge
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          auth: ${{ secrets.COVERAGE_GIST_SECRET }}
+          gistID: 0cffc203e1e03b87f50004c11fd92543
+          filename: coverage_badge.json
+          label: Coverage
+          message: ${{ env.total }}%
+          color: blue
