@@ -14,7 +14,7 @@ jobs:
           pip install pytest
       - name: Analyze testing coverage
         run: |
-          coverage run -m pytest ./tests.py
+          coverage run -m pytest ./tests.py::TestCurrentPath
           coverage report
           coverage json
       - name: Archive coverage artifacts
