@@ -16,9 +16,8 @@ jobs:
       - name: Analyze testing coverage
         run: |
           set -xe
-          coverage run -m pytest /tests.py
-          coverage report
-          coverage json
+          coverage run -m pytest /home/runner/work/current_path/current_path
+          coverage json ./test.py ./current_path.py
       - name: Archive coverage artifacts
         uses: actions/upload-artifact@v3
         with:
