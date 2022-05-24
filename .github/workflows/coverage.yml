@@ -16,7 +16,7 @@ jobs:
       - name: Analyze testing coverage
         run: |
           set -xe
-          coverage run -m pytest ./tests.py::TestCurrentPath
+          coverage run -m pytest tests.py
           coverage report
           coverage json
       - name: Archive coverage artifacts
