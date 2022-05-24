@@ -9,13 +9,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          set -xe
           python -m pip install --upgrade pip
           pip install coverage
           pip install pytest
       - name: Analyze testing coverage
         run: |
-          set -xe
           coverage run -m pytest ./tests.py
           coverage json ./tests.py ./current_path.py
       - name: Archive coverage artifacts
@@ -27,7 +25,7 @@ jobs:
         id: info
         run: |
           export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
-          echo "total=$TOTAL"
+          echo "total=$TOTAL" >> $GITHUB_ENV
       - name: Generate badge
         uses: schneegans/dynamic-badges-action@v1.4.0
         with:
