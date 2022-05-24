@@ -15,6 +15,7 @@ jobs:
       - name: Analyze testing coverage
         run: |
           coverage run -m pytest ./tests.py
+          coverage report
           coverage json
       - name: Archive coverage artifacts
         uses: actions/upload-artifact@v3
