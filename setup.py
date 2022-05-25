@@ -29,7 +29,7 @@ setuptools.setup(
     author_email="arithmatlic@gmail.com",
     description="A small library for getting current path data "
                 "for a script that imports this library.",
-    classifiers=classifiers.splitlines(),
+    classifiers=CLASSIFIERS.splitlines(),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jon-edward/current_path",
