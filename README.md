@@ -58,7 +58,7 @@ invoked from, the file is created in the same location.
 
 ## License
 
-Licensed under the [CC0 License](https://creativecommons.org/share-your-work/public-domain/cc0/).
+Licensed under the [CC0-1.0 License](https://creativecommons.org/share-your-work/public-domain/cc0/).
 
 [coverage_badge_link]:
 https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jon-edward/0cffc203e1e03b87f50004c11fd92543/raw/
