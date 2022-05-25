@@ -3,7 +3,7 @@ A small library for getting current path data for a script that imports
 this library.
 """
 
-__all__ = ("CurrentPathError", "current_dir", "current_file", "current_dir_as_cwd")
+__all__ = ("current_dir", "current_file", "current_dir_as_cwd", "CurrentPathError")
 
 
 from contextlib import contextmanager
