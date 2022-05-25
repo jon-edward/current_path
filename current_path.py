@@ -40,14 +40,12 @@ def _calling_module_current_file(depth: int = 2) -> Path:
 
 
 def current_file() -> Path:
-    """Returns the current file for the importing script.
-    :raises CurrentPathError: Cannot find path for the script current_path was called in."""
+    """Returns the current file for the importing script."""
     return _calling_module_current_file()
 
 
 def current_dir() -> Path:
-    """Returns the current directory for the importing script.
-    :raises CurrentPathError: Cannot find path for the script current_dir was called in."""
+    """Returns the current directory for the importing script."""
     return _calling_module_current_file().parent.absolute()
 
 
@@ -60,7 +58,6 @@ def current_dir_as_cwd(*path_segments: PathType):
     Creates a context manager that temporarily changes current working directory
     to the importing library's directory.
     :keyword with_joined_path: Specifies path to join with importing module's current directory.
-    :raises CurrentPathError: Cannot find path for the script current_dir_as_cwd was called in.
     """
     old_dir = Path(os.getcwd()).absolute()
     importing_file = _calling_module_current_file(depth=3)
