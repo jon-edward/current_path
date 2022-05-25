@@ -48,7 +48,7 @@ if __name__ == '__main__':
     with current_dir_as_cwd():
         #  CWD is this file's directory.
         os.mkdir("file_directory")
-        create_file("file_0.txt")
+        create_file("./file_directory/file_0.txt")
     
     #  CWD returns to same arbitrary directory.
 ```
