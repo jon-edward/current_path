@@ -1,3 +1,7 @@
+"""
+Setup script for uploading current-path to PyPI.
+"""
+
 import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
