@@ -24,7 +24,9 @@ jobs:
       - name: Calculate coverage info
         id: info
         run: |
-          export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
+          export TOTAL=$(python -c "
+            import json
+            print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
           echo "total=$TOTAL" >> $GITHUB_ENV
       - name: Generate badge
         uses: schneegans/dynamic-badges-action@v1.4.0
@@ -34,4 +36,4 @@ jobs:
           filename: coverage_badge.json
           label: Coverage
           message: ${{ env.total }}%
-          color: "#153817"
+          color: green
